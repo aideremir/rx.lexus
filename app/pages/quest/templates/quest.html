@@ -1,0 +1,43 @@
+<ion-view>
+    <ion-content class="quest-page-lexus">
+      <div class="quest-page-header-background" ng-style="quest.backHeader()"></div>
+      <div class="quest-page-header" ng-style="quest.frontHeader()">
+        <div class="quest-page-header-avatar" ng-style="{ 'background-image': root.userData.picture.data.url ? 'url(' + root.userData.picture.data.url + ')' : (!root.answerUser[0] ? 'url(./img/female.png)' : 'url(./img/male.png)') }">
+          <div class="quest-page-header-counter">{{quest.counter}}</div>
+        </div>
+      </div>
+      <div class="quest-page-quations-box">
+        <div class="quations-box-title"> {{quest.questionsSex()}}</div>
+        <div class="list" ng-if="quest.number !== 4 && quest.number !== 7">
+          <label class="item item-radio quations-box-quations"
+                 ng-repeat="item in quest.answersSex() track by $index" ng-click="quest.changeCounter()">
+            <input type="radio" ng-value="$index" ng-model="root.answerUser[quest.number]">
+            <i class="radio-icon"></i>
+            <div class="item-content" ng-bind="item"></div>
+          </label>
+        </div>
+        <div class="list" ng-if="quest.number === 4 || quest.number === 7">
+          <label class="item item-radio quations-box-quations"
+                 ng-repeat="item in quest.answersSex() track by $index" ng-click="quest.changeCounter()">
+            <input type="checkbox" ng-model="root.answerUser[quest.number][$index]">
+            <i class="quations-checkbox-icon"></i>
+            <div class="item-content" ng-bind="item"></div>
+          </label>
+        </div>
+      </div>
+      <div class="quest-page-info">
+        <div class="quest-page-info-item"
+             ng-repeat="item in quest.questionsJson.questions track by $index"
+             ng-class="{ active: $index === quest.number }"></div>
+      </div>
+      <div class="quest-page-loc prev" ng-click="quest.prev()">
+        <div class="quest-page-loc-button prev"></div>
+        <i class="icon ion-chevron-left"></i>
+      </div>
+      <div class="quest-page-loc next" ng-click="quest.next()" ng-class="{ disabled: !quest.isAnswer() }">
+        <div class="quest-page-loc-button next"></div>
+        <i class="icon ion-chevron-right"></i>
+      </div>
+      <div ng-include="'templates/footer_about.html'"></div>
+    </ion-content>
+</ion-view>

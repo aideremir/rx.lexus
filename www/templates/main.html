@@ -1,0 +1,14 @@
+<ion-header-bar class="bar-dark">
+  <div class="navicon-lexus" ng-click="root.isOpenMenu = !root.isOpenMenu"></div>
+  <h1 class="title"></h1>
+  <div class="button logo-lexus"></div>
+</ion-header-bar>
+<div class="list menu-lexus" ng-if="root.isOpenMenu">
+  <a class="item"
+     ng-repeat="item in root.menu track by $index"
+     target="_blank" ng-href="{{item.href}}"
+     ng-click="root.GA('menu-link', item.title)"
+     ng-bind="item.title"></a>
+</div>
+<ion-nav-view name="appView"></ion-nav-view>
+<div class="zaglushka" ng-if="root.orientation"></div>

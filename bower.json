@@ -1,0 +1,30 @@
+{
+  "name": "Lexus",
+  "private": "true",
+  "dependencies": {
+    "ionic": "driftyco/ionic-bower#1.0.1"
+  },
+  "overrides": {
+    "angular": {
+      "ignore": true
+    },
+    "angular-animate": {
+      "ignore": true
+    },
+    "angular-sanitize": {
+      "ignore": true
+    },
+    "angular-ui-router": {
+      "ignore": true
+    },
+    "ionic": {
+      "main": {
+        "development": "js/ionic.bundle.js",
+        "production": "js/ionic.bundle.min.js"
+      }
+    }
+  },
+  "devDependencies": {
+    "ionic": "driftyco/ionic-bower#1.0.1"
+  }
+}

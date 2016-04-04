@@ -1,0 +1,63 @@
+<ion-view>
+  <ion-content class="result-page-lexus">
+    <div class="result-page-header-background" ng-style="result.backHeader()"></div>
+    <div class="result-page-header"
+         ng-repeat="item in result.ksp.carColor"
+         ng-show="item.show"
+         ng-style="{ 'background-image': 'url(./public/result/adv/' + (!!root.answerUser[0] ? 'man/' : 'woman/') + result.ksp.carName.split(' ').join('') + '/' + item.file + '.png)' }"></div>
+    <div class="result-carcolor-menu" ng-class="{ open: result.isOpenCarColorMenu }">
+      <div class="result-carcolor-menu-item"
+           ng-style="{ 'background-color': item.color }"
+           ng-click="result.selectColorCar(item)"
+           ng-repeat="item in result.ksp.carColor track by $index"></div>
+    </div>
+    <div class="result-page-main-box">
+      <div class="result-box-title" ng-bind-html="result.getTitle(result.ksp.title)"></div>
+      <div class="result-box-title" style="color: #a09a8c;">ВАМ ПОДХОДИТ<br>{{result.ksp.carName}}</div>
+      <div class="result-p-box">
+        <div class="result-page-header-avatar" ng-style="{ 'background-image': root.userData.picture.data.url ? 'url(' + root.userData.picture.data.url + ')' : (!root.answerUser[0] ? 'url(./img/female.png)' : 'url(./img/male.png)') }"></div>
+        <p class="result-p">
+          <span>Найдено {{result.ksp.items.length}} {{result.num2word(result.ksp.items.length, ['преимущество', 'преимущества', 'преимуществ'])}}</span>
+          Lexus RX для вашего образа жизни. Делитесь результатом и получите годовую подписку на журнал Lexus Beyond</p>
+      </div>
+      <div class="result-button-box">
+        <button class="button button-large button-light" ng-click="result.scrollToKSP(); root.GA('button', 'Узнать')">Узнать</button>
+        <button class="button button-large button-light" ng-click="result.sharePopup(); root.GA('button', 'Поделиться1')">Поделиться</button>
+      </div>
+    </div>
+    <div class="result-page-text-box">
+      <div class="list">
+        <div class="item item-thumbnail-left"  ng-repeat="item in result.circlesList">
+          <img class="result-page-text-box-pic" ng-src="{{ item.image }}">
+          <p>{{ item.text }} <span ng-if="!!item.friendName">{{item.bonusText}}<span class="friend-name">{{item.friendName}}</span></span></p>
+          <img ng-if="!!item.friendAvatar" class="result-page-text-box-avatar" ng-src="{{item.friendAvatar}}">
+        </div>
+        </div>
+    </div>
+    <div class="result-page-button-box">
+      <button class="button button-light" ng-click="root.answerUser = []; result.href('/'); root.GA('button', 'Еще раз')">Еще раз</button>
+      <button class="button button-light" ng-click="result.sharePopup(); root.GA('button', 'Поделиться2')">Поделиться</button>
+      <button class="button button-light" style="position: absolute; margin-right: 0" ng-click="result.scrollToKSP(); root.GA('button', 'Еще преимущества')">Еще преимущества</button>
+    </div>
+    <div class="result-page-ksp-box" id="ksps">
+      <div class="title-ksp">
+        {{result.ksp.items.length}} {{result.num2word(result.ksp.items.length, ['преимущество', 'преимущества', 'преимуществ'])}} {{result.ksp.carName}} для вашей жизни
+      </div>
+
+      <div class="items-ksp">
+        <div class="item-ksp" ng-repeat="item in result.ksp.items track by $index" ng-if="!item.hidden">
+          <video class="item-ksp-video"
+                 ng-if="item.data.video"
+                 ng-attr-poster="{{item.data.poster}}.jpg"
+                 controls>
+            <source ng-src="{{item.data.video + '.mp4'}}">
+          </video>
+          <img class="item-ksp-image" ng-if="!item.data.video" ng-src="./public/result/adv/images/{{item.id}}.jpg">
+          <div class="item-ksp-title" ng-bind-html="item.data.title"></div>
+          <div class="item-ksp-desc" ng-bind-html="item.data.text"></div>
+        </div>
+      </div>
+    </div>
+    <div ng-include="'templates/footer_about.html'"></div>
+  </ion-content>
+</ion-view>
